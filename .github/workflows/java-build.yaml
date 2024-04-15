@@ -23,9 +23,11 @@ jobs:
           
       - name: Build, using mvn
         run: mvn clean install
+        working-directory: ./java-calc
 
       - name: Run unit tests
         run: mvn test
+        working-directory: ./java-calc
 
       - name: Fetch tags and branches
         run: git fetch --prune --unshallow
