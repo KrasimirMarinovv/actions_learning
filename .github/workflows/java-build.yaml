@@ -1,5 +1,7 @@
 name: Java workflow
 
+## Adding permissions, because of CodeQL
+
 permissions:
   contents: read
   security-events: write
@@ -100,6 +102,7 @@ jobs:
 
       - name: Build the project for CodeQL
         run: mvn clean install -DskipTests
+        working-directory: ./java-calc
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
