@@ -30,7 +30,7 @@ jobs:
 
       - name: Format Java code
         run: |
-          java -jar google-java-format-1.9-all-deps.jar --replace java-calc/src/**/*.java
+          find java-calc/src -name "*.java" -exec java -jar google-java-format-1.9-all-deps.jar --replace {} +
 
       ## Linting, using Checkstyle
 
