@@ -80,13 +80,14 @@ jobs:
       - name: Output new version
         run: echo "The new version is ${{ steps.tag_version.outputs.new_tag }}"
 
+
   codeql-analysis:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Java for CodeQL
+      - name: Setup JDK 11
         uses: actions/setup-java@v4
         with:
           java-version: '11'
@@ -96,6 +97,9 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: java
+
+      - name: Build the project for CodeQL
+        run: mvn clean install -DskipTests
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
