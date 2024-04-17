@@ -25,19 +25,16 @@ jobs:
         run: |
           wget https://github.com/checkstyle/checkstyle/releases/download/checkstyle-9.0/checkstyle-9.0-all.jar
           echo "Checkstyle installed."
+       
+      - name: Create logs directory
+        run: mkdir -p logs
 
       - name: Run Checkstyle
         run: |
-          java -jar checkstyle-9.0-all.jar -c /google_checks.xml ./java-calc/src > ./logs/checkstyle-results.log
-        shell: bash
-
-      - name: Create logs directory and move file
-        run: |
-          mkdir -p logs
-          mv checkstyle-results.log logs/
+          java -jar checkstyle-9.0-all.jar -c /google_checks.xml ./java-calc/src > ./logs/checkstyle-results.log    
 
       - name: Upload lint results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: lint-results
           path: logs/checkstyle-results.log
