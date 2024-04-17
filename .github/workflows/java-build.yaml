@@ -21,24 +21,26 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Run Super-Linter
-        uses: github/super-linter@v4
-        continue-on-error: true
-        env:
-          VALIDATE_JAVA: true
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      - name: Install Checkstyle
+        run: |
+          wget https://github.com/checkstyle/checkstyle/releases/download/checkstyle-9.0/checkstyle-9.0-all.jar
+          echo "Checkstyle installed."
 
-      - name: Capture output from the linting tool
-        if: always()
+      - name: Run Checkstyle
+        run: |
+          java -jar checkstyle-9.0-all.jar -c /google_checks.xml ./java-calc/src > ./logs/checkstyle-results.log
+        shell: bash
+
+      - name: Create logs directory and move file
         run: |
           mkdir -p logs
-          docker logs ${{ steps.linter.outputs.linter_id }} > ./logs/lint-results.log
+          mv checkstyle-results.log logs/
 
       - name: Upload lint results
         uses: actions/upload-artifact@v2
         with:
           name: lint-results
-          path: logs/lint-results.log
+          path: logs/checkstyle-results.log
           
       - name: Build, using mvn
         run: mvn clean install
