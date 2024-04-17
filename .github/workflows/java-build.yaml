@@ -21,10 +21,25 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
+      ## Code formatting, using Google Java Format
+
+      - name: Install Google Java Format
+        run: |
+          wget https://github.com/google/google-java-format/releases/download/google-java-format-1.9/google-java-format-1.9-all-deps.jar
+          echo "Google Java Format installed."
+
+      - name: Format Java code
+        run: |
+          java -jar google-java-format-1.9-all-deps.jar --replace java-calc/src/**/*.java
+
+      ## Linting, using Checkstyle
+
       - name: Install Checkstyle
         run: |
           wget https://github.com/checkstyle/checkstyle/releases/download/checkstyle-9.0/checkstyle-9.0-all.jar
           echo "Checkstyle installed."
+
+      ## Create logs directory and upload the logs after the linting tool has scanned the code
        
       - name: Create logs directory
         run: mkdir -p logs
@@ -38,7 +53,7 @@ jobs:
         with:
           name: lint-results
           path: logs/checkstyle-results.log
-          
+
       - name: Build, using mvn
         run: mvn clean install
         working-directory: ./java-calc
