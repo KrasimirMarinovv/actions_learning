@@ -100,7 +100,8 @@ jobs:
           languages: java
 
       - name: Build the project for CodeQL
-        run: mvn clean install -DskipTests  # Ensure this command compiles your Java/Kotlin code
+        run: mvn clean install -DskipTests
+        working-directory: ./java-calc
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
