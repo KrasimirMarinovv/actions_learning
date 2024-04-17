@@ -1,5 +1,9 @@
 name: Java workflow
 
+permissions:
+  contents: read
+  security-events: write
+
 on:
   push:
     branches:
