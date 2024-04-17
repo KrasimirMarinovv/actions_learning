@@ -68,6 +68,10 @@ jobs:
         run: mvn test
         working-directory: ./java-calc
 
+      - name: Run integration tests
+        run: mvn failsafe:integration-test failsafe:verify
+        working-directory: ./java-calc
+
       - name: Fetch tags and branches
         run: git fetch --prune --unshallow
 
