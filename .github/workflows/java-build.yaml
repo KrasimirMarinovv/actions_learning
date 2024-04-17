@@ -82,27 +82,25 @@ jobs:
       - name: Output new version
         run: echo "The new version is ${{ steps.tag_version.outputs.new_tag }}"
 
+  codeql-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-          #  codeql-analysis:
-    #    runs-on: ubuntu-latest
-      #    steps:
-      #      - name: Checkout code
-        #        uses: actions/checkout@v4
+      - name: Setup JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'adopt'
 
-          #      - name: Setup JDK 11
-        #        uses: actions/setup-java@v4
-          #        with:
-          #          java-version: '11'
-            #          distribution: 'adopt'
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: java
 
-            #      - name: Initialize CodeQL
-        #        uses: github/codeql-action/init@v3
-          #        with:
-          #          languages: java
+      - name: Build the project for CodeQL
+        run: mvn clean install -DskipTests  # Ensure this command compiles your Java/Kotlin code
 
-            #      - name: Build the project for CodeQL
-        #        run: mvn clean install -DskipTests
-          #        working-directory: ./java-calc
-
-          #      - name: Perform CodeQL Analysis
-        #        uses: github/codeql-action/analyze@v3
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
