@@ -102,6 +102,7 @@ jobs:
           file: ./java-calc/Dockerfile
           push: true
           tags: marinovk/java-calc:latest
+        working-directory: ./java-calc 
 
 
   codeql-analysis:

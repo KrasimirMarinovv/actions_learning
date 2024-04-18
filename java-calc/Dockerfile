@@ -1,21 +1,18 @@
-# Use the official Maven image to build your app
 FROM maven:3.6.3-jdk-11-slim AS build
 
-# Copy the project files to the container
-COPY src /home/app/src
-COPY pom.xml /home/app
+# Copy pom.xml and source code
+COPY pom.xml /usr/src/app/
+COPY src /usr/src/app/src
+
+WORKDIR /usr/src/app
 
 # Package the application
-RUN mvn -f /home/app/pom.xml clean package
+RUN mvn clean package
 
-# Use the official OpenJDK image to create a lean production image
+# Start a new stage from scratch
 FROM openjdk:11-jre-slim
+COPY --from=build /usr/src/app/target/app.jar /app.jar
 
-# Copy the built jar file from the build stage
-COPY --from=build /home/app/target/External-IP-Checker-1.0.2.jar /usr/local/lib/External-IP-Checker.jar
-
-# Expose the port the app runs on
 EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app.jar"]
 
-# Run the jar file
-ENTRYPOINT ["java","-jar","/usr/local/lib/External-IP-Checker.jar"]
