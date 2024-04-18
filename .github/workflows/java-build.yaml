@@ -97,12 +97,12 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
+        working-directory: ./java-calc
         with:
           context: .
           file: ./java-calc/Dockerfile
           push: true
           tags: marinovk/java-calc:latest
-        working-directory: ./java-calc 
 
 
   codeql-analysis:
