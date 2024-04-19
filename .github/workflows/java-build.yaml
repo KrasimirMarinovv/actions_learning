@@ -101,7 +101,7 @@ jobs:
           context: ./java-calc
           file: ./java-calc/Dockerfile
           push: true
-          tags: krasi90/java-calc:latest
+          tags: krasi90/java-calc:${{ steps.tag_version.outputs.new_tag }}
 
   codeql-analysis:
     runs-on: ubuntu-latest
