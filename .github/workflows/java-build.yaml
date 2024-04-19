@@ -27,6 +27,10 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
+      - name: Generate Javadoc
+        run: mvn javadoc:javadoc
+        working-directory: ./java-calc
+
       ## Code formatting, using Google Java Format
 
       - name: Install Google Java Format
