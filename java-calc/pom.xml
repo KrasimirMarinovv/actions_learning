@@ -4,34 +4,30 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Basic project information -->
-    <groupId>amadeus</groupId>
+    <groupId>com.example</groupId>
     <artifactId>java-calc</artifactId>
-    <version>0.0.1</version>
+    <version>1.0-SNAPSHOT</version>
 
-    <name>Java Calculator</name>
-    <description>A simple Java calculator application for demonstration.</description>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <jar.name>java-calc-app</jar.name>
-    </properties>
-
-    <!-- Dependencies -->
     <dependencies>
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>0.9.12</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
     </dependencies>
 
-    <!-- Build configurations -->
     <build>
         <plugins>
-            <!-- Maven Assembly Plugin to package jar with dependencies -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -54,26 +50,6 @@
                             <mainClass>com.example.java_calc.App</mainClass>
                         </manifest>
                     </archive>
-                    <outputDirectory>${project.build.directory}</outputDirectory>
-                    <finalName>${jar.name}</finalName>
-                </configuration>
-            </plugin>
-
-            <!-- Maven Javadoc Plugin to generate Javadocs -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <failOnError>false</failOnError>
                 </configuration>
             </plugin>
         </plugins>
