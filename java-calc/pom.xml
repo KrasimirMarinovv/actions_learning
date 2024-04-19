@@ -4,10 +4,25 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Add your project groupId, artifactId, version, name etc. here -->
+    <groupId>com.ixbitz.utils</groupId>
+    <artifactId>External-IP-Checker</artifactId>
+    <version>1.0.2</version>
+    <name>External-IP-Checker</name>
+    <url>https://github.com/Ixbitz/External-IP-Checker</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <jar.name>app</jar.name>  <!-- Dynamic naming via property -->
+    </properties>
 
     <dependencies>
-        <!-- Your existing dependencies -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+        </dependency>
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
@@ -40,25 +55,7 @@
                         </manifest>
                     </archive>
                     <outputDirectory>${project.build.directory}</outputDirectory>
-                    <finalName>${jar.name}</finalName>
-                </configuration>
-            </plugin>
-
-            <!-- Javadoc plugin configuration -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <failOnError>false</failOnError>
+                    <finalName>${jar.name}</finalName> <!-- Uses property for the jar name -->
                 </configuration>
             </plugin>
         </plugins>
