@@ -83,9 +83,10 @@ jobs:
         id: tag_version
         uses: mathieudutour/github-tag-action@v5.6
         with:
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
           default_bump: patch
           release_branches: java
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
 
       - name: Output new version
         run: echo "The new version is ${{ steps.tag_version.outputs.new_tag }}"
