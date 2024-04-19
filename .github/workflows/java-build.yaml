@@ -85,8 +85,7 @@ jobs:
         with:
           default_bump: patch
           release_branches: java
-        env:
-           GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
 
       - name: Output new version
